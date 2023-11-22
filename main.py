@@ -1,36 +1,7 @@
 import controle as co
-import re
 import numpy as np
-
-#! Primeiro passo -> Extrair as informações dos textos
-
-# *Colhendo os coeficientes da função Z
-coeficientes = re.findall(r'[-+]?\d*\.?\d+', co.funcao)
-coeficientes = [float(numero) for numero in coeficientes]
-coeficientes = [ -numero for numero in coeficientes]
-
-
-linha_z = coeficientes + ([0.0] * len(co.restricoes) + [0])
-# *Colhendo os coeficientes das restrições
-restricoes = []
-index = 0
-for restricao in co.restricoes:
-    values = re.findall(r'[-+]?\d*\.?\d+', restricao[0])
-    values = [float(numero) for numero in values]
-    variaveis = [0.0]*len(co.restricoes)
-    variaveis[index] = 1.0 if restricao[1] == "<=" else -1.0
-    index+=1
-    ld = [restricao[2]]
-    restricoes.append(values + variaveis + ld)
-
-#Criando a matriz principal
-linhas = [linha_z] + [linha for linha in restricoes]
-
-matriz = np.zeros(shape=(len(co.restricoes) + 1,len(coeficientes) + len(co.restricoes)))
-matriz = np.vstack(linhas)
-matriz = matriz.astype(float)
-np.set_printoptions(precision=2, suppress=True)
-
+import Maximize
+import Minimize
 
 def encontrar_coluna_pivo(linha):
     return np.argmin(linha)
@@ -61,6 +32,12 @@ def atualizar_restante_da_matriz(linha, coluna):
             continue
         matriz[i] = matriz[i] -1*(matriz[i, coluna])*matriz[linha]
 
+if co.opcao == "Maximize":
+    matriz = Maximize.retornar_matriz()
+elif co.opcao == "Minimize":
+    matriz = Minimize.retornar_matriz()
+
+np.set_printoptions(precision=2, suppress=True)
 linha_z = matriz[0].astype(float)
 valores = linha_z[np.where(linha_z < 0)]
 variaveis_base = []
@@ -79,11 +56,15 @@ while(len(valores) > 0):
 
     x = input()
 
+
+co.lucro_maximo = matriz[0,-1]
+lucro = co.lucro_maximo
+co.preco_sombra = matriz[0, co.nConstantes:-1]
+pSombra = co.preco_sombra
+co.melhor_pontos = matriz[1:, -1]
+mPontos = co.melhor_pontos
+
+print(lucro)
+print(pSombra)
+print(mPontos)
 print(matriz)
-co.lucro_maximo = str(matriz[0,-1])
-co.preco_sombra = str(matriz[0, len(coeficientes) : -1])
-
-
-print("Melhor lucro: " + str(matriz[0, -1]))
-print("Preço sombra: " + str(matriz[0, len(coeficientes) : -1]))
-print("Ponto ótimo de operação: " + str(matriz[1:,-1]))

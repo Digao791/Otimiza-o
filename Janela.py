@@ -33,11 +33,38 @@ def report():
 
     report_label = Label(window, text="Report", font=("Arial, 32"))
     report_label.pack(side='top', pady=10)
-    lucro_label = Label(window, text="Lucro")
-    lucro_label.pack(side='top', pady=10)
+    
+    data = Frame(window, width=400, height=400, borderwidth=3, highlightcolor='black')
+    data.pack(side='top', pady=40)
 
-    lucro_value = Label(window, text=co.lucro_maximo)
-    lucro_value.pack(side='top', pady=10)
+    data_lucro = Label(data, text="Lucro", font=("Arial, 12"))
+    data_lucro.grid(row=0, column=0, padx=5, pady=5)
+
+    equal = Label(data, text="=", font=("Arial, 12"))
+    equal.grid(row=0, column=1, padx=5, pady=5)
+
+    data_lucro_value = Label(data, text=co.lucro_maximo, font=("Arial, 12"))
+    data_lucro_value.grid(row=0, column=2, padx=5, pady=5)
+
+    data_sombra = Label(data, text="Preço-sombra", font=("Arial, 12"))
+    data_sombra.grid(row=1, column=0, padx=5, pady=5)
+
+    equal = Label(data, text="=", font=("Arial, 12"))
+    equal.grid(row=1, column=1, padx=5, pady=5)
+
+    data_sombra_value = Label(data, text=co.preco_sombra, font=("Arial, 12"))
+    data_sombra_value.grid(row=1 , column=2, padx=5, pady=5)
+
+    data_melhor_ponto = Label(data, text="Ponto ótimo", font=("Arial, 12"))
+    data_melhor_ponto.grid(row=2, column=0, padx=5, pady=5)
+
+    equal = Label(data, text="=", font=("Arial, 12"))
+    equal.grid(row=2, column=1, padx=5, pady=5)
+
+    data_melhor_ponto_value = Label(data, text=co.melhor_pontos, font=("Arial, 12"))
+    data_melhor_ponto_value.grid(row=2, column=2, padx=5, pady=5)
+
+    
 
 
 
