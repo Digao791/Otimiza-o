@@ -55,11 +55,13 @@ np.set_printoptions(precision=2, suppress=True)
 linha_z = matriz[0].astype(float)
 #Filtra pelos valores menores que zero
 valores = linha_z[np.where(linha_z < 0)]
-#Variáveis que se encontram na base
-variaveis_base = []
 
 variaveis_de_base = re.findall(r'[a-zA-Z]', co.funcao)
 variaveis_de_base = [str(letra) for letra in variaveis_de_base]
+
+tamanho = len(variaveis_de_base)
+
+variaveis_base = [0]*tamanho
 
 #Enquanto tiver valores negativos na linha Z
 while(len(valores) > 0):
