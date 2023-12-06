@@ -55,14 +55,24 @@ def report():
     data_sombra_value = Label(data, text=co.preco_sombra, font=("Arial, 12"))
     data_sombra_value.grid(row=1 , column=2, padx=5, pady=5)
 
-    data_melhor_ponto = Label(data, text="Ponto ótimo", font=("Arial, 12"))
-    data_melhor_ponto.grid(row=2, column=0, padx=5, pady=5)
+    data_variaveis_base = Label(data, text="Variáveis base", font=("Arial, 12"))
+    data_variaveis_base.grid(row=2, column=0, padx=5, pady=5)
 
     equal = Label(data, text="=", font=("Arial, 12"))
     equal.grid(row=2, column=1, padx=5, pady=5)
 
+    data_variaveis_base_value = Label(data, text=co.variaveis_base, font=("Arial, 12"))
+    data_variaveis_base_value.grid(row=2, column=2, padx=5, pady=5)
+
+
+    data_melhor_ponto = Label(data, text="Ponto ótimo", font=("Arial, 12"))
+    data_melhor_ponto.grid(row=3, column=0, padx=5, pady=5)
+
+    equal = Label(data, text="=", font=("Arial, 12"))
+    equal.grid(row=3, column=1, padx=5, pady=5)
+
     data_melhor_ponto_value = Label(data, text=co.melhor_pontos, font=("Arial, 12"))
-    data_melhor_ponto_value.grid(row=2, column=2, padx=5, pady=5)
+    data_melhor_ponto_value.grid(row=3, column=2, padx=5, pady=5)
 
     
 
